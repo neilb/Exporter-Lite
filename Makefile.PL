@@ -7,7 +7,7 @@
 
 use ExtUtils::MakeMaker;
 
-$PACKAGE = 'Module::Name';
+$PACKAGE = 'Exporter::Lite';
 ($PACKAGE_FILE = $PACKAGE) =~ s|::|/|g;
 $LAST_API_CHANGE = 0;
 
