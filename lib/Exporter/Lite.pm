@@ -1,65 +1,15 @@
 package Exporter::Lite;
 
 require 5.004;
-use strict 'vars';  # we're going to be doing a lot of sym refs
 
-use vars qw($VERSION @EXPORT);
-$VERSION = 0.01;
+# Using strict or vars almost doubles our load time.  Turn them back
+# on when debugging.
+#use strict 'vars';  # we're going to be doing a lot of sym refs
+#use vars qw($VERSION @EXPORT);
+
+$VERSION = 0.02;
 @EXPORT = qw(import);   # we'll know pretty fast if it doesn't work :)
 
-
-=head1 NAME
-
-Exporter::Lite - Lightweight exporting of variables
-
-=head1 SYNOPSIS
-
-  package Foo;
-  use Exporter::Lite;
-
-  # Just like Exporter.
-  @EXPORT       = qw($This &That);
-  @EXPORT_OK    = qw(@Left %Right);
-
-
-  # Meanwhile, in another piece of code!
-  package Bar;
-  use Foo;  # exports $This and &That.
-
-
-=head1 DESCRIPTION
-
-This is an alternative to Exporter intended to provide a lightweight
-subset of its functionality.  It supports C<import>, C<@EXPORT> and
-C<@EXPORT_OK> and not a whole lot else.
-
-Unlike Exporter, it is not necessary to inherit from Exporter::Lite
-(ie. no C<@ISA = qw(Exporter::Lite)> mantra).  Exporter::Lite simply
-exports its import() function.  This might be called a "mix-in".
-
-=head1 Methods
-
-Export::Lite has one public method, import(), which is called
-automaticly when your modules is use()'d.
-
-=over 4
-
-=item B<import>
-
-  Some::Module->import;
-  Some::Module->import(@symbols);
-
-Works just like C<Exporter::import()> excepting it only honors
-@Some::Module::EXPORT and @Some::Module::EXPORT_OK.
-
-The given @symbols are exported to the current package provided they
-are in @Some::Module::EXPORT or @Some::Module::EXPORT_OK.  Otherwise
-an exception is thrown (ie. the program dies).
-
-If @symbols is not given, everything in @Some::Module::EXPORT is
-exported.
-
-=cut
 
 
 sub import {
@@ -79,10 +29,10 @@ sub import {
         if( $eokglob = ${$exporter.'::'}{EXPORT_OK} and *$eokglob{ARRAY} ) {
             if( @{$exporter.'::EXPORT_OK'} ) {
                 # This can also be cached.
-                my %ok = map { $_ => 1} @{$exporter.'::EXPORT_OK'},
-                                        @{$exporter.'::EXPORT'};
+                my %ok = map { s/^&//; $_ => 1 } @{$exporter.'::EXPORT_OK'},
+                                                 @{$exporter.'::EXPORT'};
 
-                my($denied) = grep {!$ok{$_}} @imports;
+                my($denied) = grep {s/^&//; !$ok{$_}} @imports;
                 _not_exported($denied, $exporter, $file, $line) if $denied;
             }
             else {      # We don't export anything.
@@ -102,13 +52,13 @@ sub _export {
     # Stole this from Exporter::Heavy.  I'm sure it can be written better
     # but I'm lazy at the moment.
     foreach my $sym (@imports) {
+        # shortcut for the common case of no type character
+        (*{$caller.'::'.$sym} = \&{$exporter.'::'.$sym}, next)
+            unless $sym =~ s/^(\W)//;
+
+        my $type = $1;
         my $caller_sym = $caller.'::'.$sym;
         my $export_sym = $exporter.'::'.$sym;
-
-        # shortcut for the common case of no type character
-        (*{$caller_sym} = \&{$export_sym}, next)
-            unless $sym =~ s/^(\W)//;
-        my $type = $1;
         *{$caller_sym} =
             $type eq '&' ? \&{$export_sym} :
             $type eq '$' ? \${$export_sym} :
@@ -127,6 +77,82 @@ sub _not_exported {
         $thing, $exporter, $file, $line;
 }
 
+1;
+
+__END__
+
+=head1 NAME
+
+Exporter::Lite - Lightweight exporting of variables
+
+=head1 SYNOPSIS
+
+  package Foo;
+  use Exporter::Lite;
+
+  # Just like Exporter.
+  @EXPORT       = qw($This That);
+  @EXPORT_OK    = qw(@Left %Right);
+
+
+  # Meanwhile, in another piece of code!
+  package Bar;
+  use Foo;  # exports $This and &That.
+
+
+=head1 DESCRIPTION
+
+This is an alternative to Exporter intended to provide a lightweight
+subset of its functionality.  It supports C<import()>, C<@EXPORT> and
+C<@EXPORT_OK> and not a whole lot else.
+
+Unlike Exporter, it is not necessary to inherit from Exporter::Lite
+(ie. no C<@ISA = qw(Exporter::Lite)> mantra).  Exporter::Lite simply
+exports its import() function.  This might be called a "mix-in".
+
+Setting up a module to export its variables and functions is simple:
+
+    package My::Module;
+    use Exporter::Lite;
+
+    @EXPORT = qw($Foo bar);
+
+now when you C<use My::Module>, C<$Foo> and C<bar()> will show up.
+
+In order to make exporting optional, use @EXPORT_OK.
+
+    package My::Module;
+    use Exporter::Lite;
+
+    @EXPORT_OK = qw($Foo bar);
+
+when My::Module is used, C<$Foo> and C<bar()> will I<not> show up.
+You have to ask for them.  C<use My::Module qw($Foo bar)>.
+
+=head1 Methods
+
+Export::Lite has one public method, import(), which is called
+automaticly when your modules is use()'d.  
+
+In normal usage you don't have to worry about this at all.
+
+=over 4
+
+=item B<import>
+
+  Some::Module->import;
+  Some::Module->import(@symbols);
+
+Works just like C<Exporter::import()> excepting it only honors
+@Some::Module::EXPORT and @Some::Module::EXPORT_OK.
+
+The given @symbols are exported to the current package provided they
+are in @Some::Module::EXPORT or @Some::Module::EXPORT_OK.  Otherwise
+an exception is thrown (ie. the program dies).
+
+If @symbols is not given, everything in @Some::Module::EXPORT is
+exported.
+
 =back
 
 =head1 DIAGNOSTICS
@@ -144,6 +170,13 @@ wasn't recognized).
 
 =back
 
+=head1 BUGS and CAVEATS
+
+Its not yet clear if this is actually any lighter or faster than
+Exporter.  I know its at least on par.
+
+OTOH, the docs are much clearer and not having to say C<@ISA =
+qw(Exporter)> is kinda nice.
 
 =head1 AUTHORS
 
@@ -151,6 +184,6 @@ Michael G Schwern <schwern@pobox.com>
 
 =head1 SEE ALSO
 
-L<Exporter>, L<UNIVERSAL::exports>
+L<Exporter>, L<Exporter::Simple>, L<UNIVERSAL::exports>
 
 =cut
