@@ -2,9 +2,9 @@
 
 use lib qw(t/lib);
 
-use Test::More tests => 24;
+use Test::More tests => 30;
 
-use_ok('Exporter::Lite');
+BEGIN { use_ok('Exporter::Lite'); }
 can_ok(__PACKAGE__, 'import');
 
 {
@@ -14,6 +14,7 @@ can_ok(__PACKAGE__, 'import');
     ::can_ok('Dummy', 'import');
     ::ok( defined &foo,     '@EXPORT' );
     ::is( foo, 42,          '    in one piece' );
+    ::is( $foo, 'foofer',   '    and variables' );
 }
 
 {
@@ -49,12 +50,22 @@ can_ok(__PACKAGE__, 'import');
 }
 
 {
+    package YATest4;
+    use Dummy qw(bar $bar);
+    ::ok( defined &bar,     '@EXPORT_OK' );
+    ::ok( !defined &foo,    '    overrides @EXPORT' );
+    ::ok( !defined &my_sum, '    only what we asked for from @EXPORT_OK' );
+    ::is( bar, 23,          '    not damaged in transport' );
+    ::is( $bar, 'barfer',   '    $bar exported' );
+}
+
+{
     package Test5;
 
     my $warning = '';
     local $SIG{__WARN__} = sub { $warning = join '', @_ };
     eval 'use Dummy qw(bar)';
-    eval 'use Dummy qw(bar)';
+    eval 'use Dummy qw(&bar)';
     ::ok( defined &bar,     'importing multiple times' );
     ::is( $@, '',           '   no errors' );
     ::is( $warning, '',     '   no warnings' );
@@ -65,7 +76,7 @@ can_ok(__PACKAGE__, 'import');
     
     my $warning = '';
     local $SIG{__WARN__} = sub { $warning = join '', @_ };
-    eval 'use Dummy qw(bar bar bar bar bar bar)';
+    eval 'use Dummy qw(bar &bar bar bar &bar bar)';
     ::ok( defined &bar,     'importing duplicates' );
     ::is( $@, '',           '   no errors' );
     ::is( $warning, '',     '   no warnings' );
