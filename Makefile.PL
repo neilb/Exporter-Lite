@@ -1,9 +1,4 @@
-# A template for Makefile.PL.
-# - Set the $PACKAGE variable to the name of your module.
-# - Set $LAST_API_CHANGE to reflect the last version you changed the API 
-#   of your module.
-# - Fill in your dependencies in PREREQ_PM
-# Alternatively, you can say the hell with this and use h2xs.
+#!/usr/bin/perl -w
 
 use ExtUtils::MakeMaker;
 
@@ -27,10 +22,7 @@ WriteMakefile(
     NAME            => $PACKAGE,
     VERSION_FROM    => "lib/$PACKAGE_FILE.pm", # finds $VERSION
     PREREQ_PM       => {   },
-    'dist'          => { COMPRESS   => 'gzip -9',
-                         SUFFIX     => '.gz',
-                         DIST_DEFAULT   => 'all tardist',
-                       },
+    ($ExtUtils::MakeMaker::VERSION <= 6.31 ? (LICENSE => 'perl') : ()),
 );
 
 
