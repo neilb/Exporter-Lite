@@ -3,6 +3,3 @@ Makefile.PL
 lib/Exporter/Lite.pm
 t/Exporter-Lite.t
 t/lib/Dummy.pm
-t/lib/Test/Builder.pm
-t/lib/Test/More.pm
-t/lib/Test/Simple.pm
