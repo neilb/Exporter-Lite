@@ -101,6 +101,6 @@ can_ok(__PACKAGE__, 'import');
     ::is( $@, '',         'use Foo VERSION' );
 
     eval "use Dummy 99";
-    ::like( $@, '/Dummy version 99 required--this is only version/',
-                'use Foo VERSION and version too high' );
+    ::like( $@, '/Dummy version 99.* required/',
+            'use with version check' );
 }

@@ -1,6 +1,7 @@
 0.02
     - Added a Changes file. :)
-    - Added a license notice.
+    - Added a license notice. (jjore@cpan.org) [rt.cpan.org 20323]
+    - Fixed the version check test for 5.10. [rt.cpan.org 13648]
 
 0.01  Sat Dec 16 2001
     * First working release
