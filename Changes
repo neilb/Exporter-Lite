@@ -1,4 +1,4 @@
-0.02
+0.02  Sat Nov 11 18:09:19 CST 2006
     - Added a Changes file. :)
     - Added a license notice. (jjore@cpan.org) [rt.cpan.org 20323]
     - Fixed the version check test for 5.10. [rt.cpan.org 13648]
