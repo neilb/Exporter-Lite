@@ -1,13 +1,13 @@
 package Exporter::Lite;
 
-require 5.004;
+require 5.006;
 
 # Using strict or vars almost doubles our load time.  Turn them back
 # on when debugging.
 #use strict 'vars';  # we're going to be doing a lot of sym refs
 #use vars qw($VERSION @EXPORT);
 
-$VERSION = 0.02;
+our $VERSION = '0.02_01';
 @EXPORT = qw(import);   # we'll know pretty fast if it doesn't work :)
 
 
@@ -132,7 +132,7 @@ You have to ask for them.  C<use My::Module qw($Foo bar)>.
 =head1 Methods
 
 Export::Lite has one public method, import(), which is called
-automaticly when your modules is use()'d.  
+automatically when your modules is use()'d.  
 
 In normal usage you don't have to worry about this at all.
 
