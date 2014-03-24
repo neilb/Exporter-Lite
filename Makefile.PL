@@ -2,6 +2,12 @@
 
 use ExtUtils::MakeMaker;
 
+my $mm_ver = $ExtUtils::MakeMaker::VERSION;
+if ($mm_ver =~ /_/) {
+    $mm_ver = eval $mm_ver;
+    die $@ if $@;
+}
+
 $PACKAGE = 'Exporter::Lite';
 ($PACKAGE_FILE = $PACKAGE) =~ s|::|/|g;
 $LAST_API_CHANGE = 0;
@@ -24,7 +30,17 @@ WriteMakefile(
     PREREQ_PM       => {
         Test::More => 0.34
     },
-    ($ExtUtils::MakeMaker::VERSION <= 6.31 ? (LICENSE => 'perl') : ()),
+
+    ($mm_ver >= 6.31
+        ? (LICENSE => 'perl')
+        : ()
+    ),
+
+    ($mm_ver >= 6.48
+        ? (MIN_PERL_VERSION => 5.006)
+        : ()
+    ),
+
 );
 
 
