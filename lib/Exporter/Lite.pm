@@ -1,20 +1,18 @@
 package Exporter::Lite;
 
 require 5.006;
-
-# Using strict or vars almost doubles our load time.  Turn them back
-# on when debugging.
-#use strict 'vars';  # we're going to be doing a lot of sym refs
-#use vars qw($VERSION @EXPORT);
+use warnings;
+use strict;
 
 our $VERSION = '0.02_01';
-@EXPORT = qw(import);   # we'll know pretty fast if it doesn't work :)
-
+our @EXPORT = qw(import);
 
 
 sub import {
     my($exporter, @imports)  = @_;
     my($caller, $file, $line) = caller;
+
+    no strict 'refs';
 
     unless( @imports ) {        # Default import.
         @imports = @{$exporter.'::EXPORT'};
@@ -48,6 +46,8 @@ sub import {
 
 sub _export {
     my($caller, $exporter, @imports) = @_;
+
+    no strict 'refs';
 
     # Stole this from Exporter::Heavy.  I'm sure it can be written better
     # but I'm lazy at the moment.
