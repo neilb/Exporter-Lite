@@ -12,4 +12,5 @@ Revision history for Perl module Exporter::Lite
     - Now depending on Test::More rather than shipping it.
 
 0.01  Sat Dec 16 2001
-    * First working release
+    - First working release
+
