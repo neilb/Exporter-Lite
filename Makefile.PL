@@ -28,8 +28,23 @@ WriteMakefile(
     NAME            => $PACKAGE,
     VERSION_FROM    => "lib/$PACKAGE_FILE.pm", # finds $VERSION
     PREREQ_PM       => {
-        Test::More => 0.34
+        'strict'   => 0,
+        'warnings' => 0,
     },
+
+    ($mm_ver >= 6.64
+        ? (TEST_REQUIRES => {
+                'Test::More' => '0.34',
+          })
+        : ()
+    ),
+
+    ($mm_ver >= 6.52
+        ? (CONFIGURE_REQUIRES => {
+                'ExtUtils::MakeMaker' => 6.30,
+          })
+        : ()
+    ),
 
     ($mm_ver >= 6.31
         ? (LICENSE => 'perl')
