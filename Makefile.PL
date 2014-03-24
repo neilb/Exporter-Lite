@@ -41,6 +41,21 @@ WriteMakefile(
         : ()
     ),
 
+    ($mm_ver <= 6.45
+        ? ()
+        : (META_MERGE => {
+            'meta-spec' => { version => 2 },
+            resources => {
+                bugtracker  => 'http://rt.cpan.org/Public/Dist/Display.html?Name=Exporter-Lite',
+                repository  => {
+                    type => 'git',
+                    web  => 'https://github.com/neilbowers/Exporter-Lite',
+                    url  => 'git://github.com/neilbowers/Exporter-Lite.git',
+                },
+            },
+          })
+    ),
+
 );
 
 

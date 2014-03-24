@@ -3,6 +3,7 @@ Revision history for Perl module Exporter::Lite
 0.02_01 2014-03-24
     - Fixed typo reported by dsteinbrunner in RT#87096
     - Now use strict and warnings
+    - Added github repo to metadata and pod
     - Added README
     - Specified min perl version 5.6.0 in metadata
 

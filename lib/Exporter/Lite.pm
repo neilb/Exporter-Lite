@@ -178,6 +178,10 @@ Exporter.  I know its at least on par.
 OTOH, the docs are much clearer and not having to say C<@ISA =
 qw(Exporter)> is kinda nice.
 
+=head1 REPOSITORY
+
+L<https://github.com/neilbowers/Exporter-Lite>
+
 =head1 AUTHORS
 
 Michael G Schwern <schwern@pobox.com>
