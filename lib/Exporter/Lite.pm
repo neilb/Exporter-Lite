@@ -4,7 +4,7 @@ require 5.006;
 use warnings;
 use strict;
 
-our $VERSION = '0.02_01';
+our $VERSION = '0.03';
 our @EXPORT = qw(import);
 
 
@@ -178,6 +178,29 @@ Exporter.  I know its at least on par.
 OTOH, the docs are much clearer and not having to say C<@ISA =
 qw(Exporter)> is kinda nice.
 
+=head1 SEE ALSO
+
+L<Exporter> is the grandaddy of all Exporter module, and bundled with Perl
+itself, unlike the rest of the modules listed here.
+
+L<Attribute::Exporter> defines attributes which you use to mark
+which subs and variables you want to export, and how.
+
+L<Exporter::Simple> also uses attributes to control the export of
+functions and variables from your module.
+
+L<Const::Exporter> makes it easy to create a module that exports constants.
+
+L<Constant::Exporter> is another module that makes it easy to create
+modules that define and export constants.
+
+L<Exporter::Auto> will export everything from your module that
+it thinks is a public function (name doesn't start with an underscore).
+
+L<Class::Exporter> lets you export class methods as regular subroutines.
+
+L<Xporter> is like Exporter, but with persistent defaults and auto-ISA.
+
 =head1 REPOSITORY
 
 L<https://github.com/neilbowers/Exporter-Lite>
@@ -192,9 +215,5 @@ This program is free software; you can redistribute it and/or
 modify it under the same terms as Perl itself.
 
 See F<http://www.perl.com/perl/misc/Artistic.html>
-
-=head1 SEE ALSO
-
-L<Exporter>, L<Exporter::Simple>, L<UNIVERSAL::exports>
 
 =cut
