@@ -1,5 +1,7 @@
+Changes
 MANIFEST
 Makefile.PL
+README
 lib/Exporter/Lite.pm
 t/Exporter-Lite.t
 t/lib/Dummy.pm

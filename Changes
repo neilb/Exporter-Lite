@@ -1,5 +1,8 @@
 Revision history for Perl module Exporter::Lite
 
+0.04 2014-03-26
+    - Had forgotten to put README and Changes in MANIFEST. Sigh.
+
 0.03 2014-03-25
     - Now maintained by NEILB
     - Fixed typo reported by dsteinbrunner in RT#87096
