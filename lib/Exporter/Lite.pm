@@ -4,7 +4,7 @@ require 5.006;
 use warnings;
 use strict;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 our @EXPORT = qw(import);
 
 
@@ -102,32 +102,40 @@ Exporter::Lite - Lightweight exporting of variables
 
 =head1 DESCRIPTION
 
-This is an alternative to Exporter intended to provide a lightweight
-subset of its functionality.  It supports C<import()>, C<@EXPORT> and
+Exporter::Lite is an alternative to L<Exporter>,
+intended to provide a lightweight subset
+of the most commonly-used functionality.
+It supports C<import()>, C<@EXPORT> and
 C<@EXPORT_OK> and not a whole lot else.
 
-Unlike Exporter, it is not necessary to inherit from Exporter::Lite
-(ie. no C<@ISA = qw(Exporter::Lite)> mantra).  Exporter::Lite simply
-exports its import() function.  This might be called a "mix-in".
+Unlike Exporter, it is not necessary to inherit from Exporter::Lite;
+Ie you don't need to write:
+
+ @ISA = qw(Exporter::Lite);
+
+Exporter::Lite simply exports its import() function into your namespace.
+This might be called a "mix-in" or a "role".
 
 Setting up a module to export its variables and functions is simple:
 
     package My::Module;
     use Exporter::Lite;
 
-    @EXPORT = qw($Foo bar);
+    our @EXPORT = qw($Foo bar);
 
-now when you C<use My::Module>, C<$Foo> and C<bar()> will show up.
+Now, when you C<use My::Module>, C<$Foo> and C<bar()> will show up.
 
-In order to make exporting optional, use @EXPORT_OK.
+In order to make exporting optional, use C<@EXPORT_OK>:
 
     package My::Module;
     use Exporter::Lite;
 
-    @EXPORT_OK = qw($Foo bar);
+    our @EXPORT_OK = qw($Foo bar);
 
-when My::Module is used, C<$Foo> and C<bar()> will I<not> show up.
-You have to ask for them.  C<use My::Module qw($Foo bar)>.
+When My::Module is used, C<$Foo> and C<bar()> will I<not> show up.
+You have to ask for them.
+
+    use My::Module qw($Foo bar);
 
 =head1 Methods
 

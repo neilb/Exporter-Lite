@@ -1,5 +1,8 @@
 Revision history for Perl module Exporter::Lite
 
+0.05 2014-03-26
+    - Improved the DESCRIPTION section, particularly the first paragraph.
+
 0.04 2014-03-26
     - Added Constant::Exporter::Lazy to SEE ALSO
     - Had forgotten to put README and Changes in MANIFEST. Sigh.
