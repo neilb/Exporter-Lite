@@ -188,7 +188,7 @@ qw(Exporter)> is kinda nice.
 
 =head1 SEE ALSO
 
-L<Exporter> is the grandaddy of all Exporter module, and bundled with Perl
+L<Exporter> is the grandaddy of all Exporter modules, and bundled with Perl
 itself, unlike the rest of the modules listed here.
 
 L<Attribute::Exporter> defines attributes which you use to mark
@@ -202,6 +202,24 @@ L<Const::Exporter> makes it easy to create a module that exports constants.
 L<Constant::Exporter> is another module that makes it easy to create
 modules that define and export constants.
 
+L<Sub::Exporter> is a "sophisticated exporter for custom-built routines";
+it lets you provide generators that can be used to customise what
+gets imported when someone uses your module.
+
+L<Exporter::Tiny> provides the same features as L<Sub::Exporter>,
+but relying only on core dependencies.
+
+L<Exporter::Shiny> is a shortcut for L<Exporter::Tiny> that
+provides a more concise notation for providing optional exports.
+
+L<Exporter::Declare> provides syntactic sugar to make the export
+status of your functions part of their declaration. Kind of.
+
+L<AppConfig::Exporter> lets you export part of an L<AppConfig>-based
+configuration.
+
+L<Exporter::Lexical> lets you export lexical subs from your module.
+
 L<Constant::Exporter::Lazy> lets you write a module that exports
 function-style constants, which are instantiated lazily.
 
@@ -211,6 +229,7 @@ it thinks is a public function (name doesn't start with an underscore).
 L<Class::Exporter> lets you export class methods as regular subroutines.
 
 L<Xporter> is like Exporter, but with persistent defaults and auto-ISA.
+
 
 =head1 REPOSITORY
 
