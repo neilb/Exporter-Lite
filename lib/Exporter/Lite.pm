@@ -90,15 +90,17 @@ Exporter::Lite - lightweight exporting of functions and variables
   package Foo;
   use Exporter::Lite;
 
-  # Just like Exporter.
-  @EXPORT       = qw($This That);
-  @EXPORT_OK    = qw(@Left %Right);
+  our @EXPORT    = qw($This That);      # default exports
+  our @EXPORT_OK = qw(@Left %Right);    # optional exports
 
+Then in code using the module:
 
-  # Meanwhile, in another piece of code!
-  package Bar;
-  use Foo;  # exports $This and &That.
+  use Foo;
+  # $This and &That are imported here
 
+You have to explicitly ask for optional exports:
+
+ use Foo qw/ @Left %Right /;
 
 =head1 DESCRIPTION
 
