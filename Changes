@@ -1,5 +1,8 @@
 Revision history for Perl module Exporter::Lite
 
+0.06 2014-07-29
+    - improved the abstract - explicit mention that functions are supported
+
 0.05 2014-03-26
     - Improved the DESCRIPTION section, particularly the first paragraph.
     - Added a bunch more Exporter modules to the SEE ALSO section.

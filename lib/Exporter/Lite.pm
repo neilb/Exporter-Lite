@@ -4,7 +4,7 @@ require 5.006;
 use warnings;
 use strict;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 our @EXPORT = qw(import);
 
 
@@ -83,7 +83,7 @@ __END__
 
 =head1 NAME
 
-Exporter::Lite - Lightweight exporting of variables
+Exporter::Lite - lightweight exporting of functions and variables
 
 =head1 SYNOPSIS
 
