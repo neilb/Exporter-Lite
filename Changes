@@ -3,6 +3,8 @@ Revision history for Perl module Exporter::Lite
 0.06 2014-07-29
     - Improved the abstract - explicit mention that functions are supported
     - Improved the SYNOPSIS - split into separate code blocks
+    - Improved the DESCRIPTION. Made clearer that as soon as you specify
+      an import symbol, you have to also specify any you want from @EXPORT.
 
 0.05 2014-03-26
     - Improved the DESCRIPTION section, particularly the first paragraph.

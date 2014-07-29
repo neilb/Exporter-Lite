@@ -125,19 +125,34 @@ Setting up a module to export its variables and functions is simple:
 
     our @EXPORT = qw($Foo bar);
 
+Functions and variables listed in the C<@EXPORT> package variable
+are automatically exported if you use the module and don't explicitly
+list any imports.
 Now, when you C<use My::Module>, C<$Foo> and C<bar()> will show up.
 
-In order to make exporting optional, use C<@EXPORT_OK>:
+Optional exports are listed in the C<@EXPORT_OK> package variable:
 
     package My::Module;
     use Exporter::Lite;
 
     our @EXPORT_OK = qw($Foo bar);
 
-When My::Module is used, C<$Foo> and C<bar()> will I<not> show up.
-You have to ask for them.
+When My::Module is used, C<$Foo> and C<bar()> will I<not> show up,
+unless you explicitly ask for them:
 
     use My::Module qw($Foo bar);
+
+Note that when you specify one or more functions or variables to import,
+then you must also explicitly list any of the default symbols you want to use.
+So if you have an exporting module:
+
+    package Games;
+    our @EXPORT    = qw/ pacman defender  /;
+    our @EXPORT_OK = qw/ galaga centipede /;
+
+Then if you want to use both C<pacman> and C<galaga>, then you'd write:
+
+    use Games qw/ pacman galaga /;
 
 =head1 Methods
 
