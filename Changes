@@ -5,6 +5,8 @@ Revision history for Perl module Exporter::Lite
     - Improved the SYNOPSIS - split into separate code blocks
     - Improved the DESCRIPTION. Made clearer that as soon as you specify
       an import symbol, you have to also specify any you want from @EXPORT.
+    - Removed the BUGS and CAVEATS section from the doc; it was just being
+      self-deprecating about whether it deserved the "lite" moniker.
 
 0.05 2014-03-26
     - Improved the DESCRIPTION section, particularly the first paragraph.

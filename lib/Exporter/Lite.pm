@@ -195,13 +195,6 @@ wasn't recognized).
 
 =back
 
-=head1 BUGS and CAVEATS
-
-Its not yet clear if this is actually any lighter or faster than
-Exporter.  I know its at least on par.
-
-OTOH, the docs are much clearer and not having to say C<@ISA =
-qw(Exporter)> is kinda nice.
 
 =head1 SEE ALSO
 
