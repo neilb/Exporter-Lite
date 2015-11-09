@@ -4,7 +4,7 @@ require 5.006;
 use warnings;
 use strict;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 our @EXPORT = qw(import);
 
 
@@ -243,7 +243,7 @@ L<Xporter> is like Exporter, but with persistent defaults and auto-ISA.
 
 =head1 REPOSITORY
 
-L<https://github.com/neilbowers/Exporter-Lite>
+L<https://github.com/neilb/Exporter-Lite>
 
 =head1 AUTHORS
 

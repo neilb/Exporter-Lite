@@ -1,5 +1,8 @@
 Revision history for Perl module Exporter::Lite
 
+0.07 2015-10-09
+    - Updated github repo URL after changing my github username
+
 0.06 2014-07-29
     - Improved the abstract - explicit mention that functions are supported
     - Improved the SYNOPSIS - split into separate code blocks

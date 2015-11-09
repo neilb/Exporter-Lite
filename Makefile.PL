@@ -64,8 +64,8 @@ WriteMakefile(
                 bugtracker  => 'http://rt.cpan.org/Public/Dist/Display.html?Name=Exporter-Lite',
                 repository  => {
                     type => 'git',
-                    web  => 'https://github.com/neilbowers/Exporter-Lite',
-                    url  => 'git://github.com/neilbowers/Exporter-Lite.git',
+                    web  => 'https://github.com/neilb/Exporter-Lite',
+                    url  => 'git://github.com/neilb/Exporter-Lite.git',
                 },
             },
           })
