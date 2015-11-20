@@ -230,7 +230,7 @@ configuration.
 
 L<Exporter::Lexical> lets you export lexical subs from your module.
 
-L<Constant::Exporter::Lazy> lets you write a module that exports
+L<Constant::Export::Lazy> lets you write a module that exports
 function-style constants, which are instantiated lazily.
 
 L<Exporter::Auto> will export everything from your module that
