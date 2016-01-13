@@ -1,5 +1,8 @@
 Revision history for Perl module Exporter::Lite
 
+0.08 2016-01-13
+    - Fixed typo in name of Constant::Export::Lazy in SEE ALSO. MANWAR++
+
 0.07 2015-10-09
     - Updated github repo URL after changing my github username
 
