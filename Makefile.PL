@@ -65,7 +65,7 @@ WriteMakefile(
                 repository  => {
                     type => 'git',
                     web  => 'https://github.com/neilb/Exporter-Lite',
-                    url  => 'git://github.com/neilb/Exporter-Lite.git',
+                    url  => 'https://github.com/neilb/Exporter-Lite.git',
                 },
             },
           })
