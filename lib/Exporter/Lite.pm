@@ -20,7 +20,7 @@ sub import {
     else {
         # Because @EXPORT_OK = () would indicate that nothing is
         # to be exported, we cannot simply check the length of @EXPORT_OK.
-        # We must to oddness to see if the variable exists at all as
+        # We must do oddness to see if the variable exists at all as
         # well as avoid autovivification.
         # XXX idea stolen from base.pm, this might be all unnecessary
         my $eokglob;
