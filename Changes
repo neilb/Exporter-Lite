@@ -1,5 +1,9 @@
 Revision history for Perl module Exporter::Lite
 
+0.09 2022-03-03 NEILB
+    - Fixed typo in comment. PR from James Raspass.
+    - Added note at the top of the DESCRIPTION to suggest you use Exporter.
+
 0.08 2016-01-13 NEILB
     - Fixed typo in name of Constant::Export::Lazy in SEE ALSO. MANWAR++
     - Simplified Makefile.PL
